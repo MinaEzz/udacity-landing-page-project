@@ -94,7 +94,7 @@ for (let i = 0; i < sections.length; i++) {
 }
 
 // add "active-link" class to the active navbar link :
-listItems = navBarList.querySelectorAll("li");
+listItems = navBarList.querySelectorAll(".navbar__menu a");
 listItems.forEach((item) => {
   item.addEventListener("click", function () {
     listItems.forEach((item) => {
@@ -103,26 +103,33 @@ listItems.forEach((item) => {
     item.classList.add("active-link");
   });
 });
+// make scroll behavior smooth :
+listItems.forEach((item) => {
+  item.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth",
+    });
+  });
+});
 
 //activate the section on scroll :
 // function to remove active class:
-const removeActive = function (section) {
+const removeActiveClass = function (section) {
   section.classList.remove("your-active-class");
 };
 //function to add active class:
-const addActive = function (section) {
+const addActiveClass = function (section) {
   section.classList.add("your-active-class");
 };
-// the activation function :
-const SectionActivation = function () {
-  sections.forEach((section) => {
-    let elementOffset = section.getBoundingClientRect(); //https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
-    //https://www.youtube.com/watch?v=MKpZadkuT-0
-    if (elementOffset.top <= 150 && elementOffset.bottom >= 150) {
-      addActive(section);
-    } else {
-      removeActive(section);
-    }
-  });
+// activation function :
+const sectionActivation = function () {
+  for (let i = 0; i < sections.length; i++) {
+    const section = sections[i];
+    let sectionOffset = section.getBoundingClientRect();
+    sectionOffset.top <= 150 && sectionOffset.bottom >= 150
+      ? addActiveClass(section)
+      : removeActiveClass(section);
+  }
 };
-window.onscroll = SectionActivation;
+window.onscroll = sectionActivation;

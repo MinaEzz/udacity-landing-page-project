@@ -14,8 +14,8 @@ For specific, detailed instructions, look at the project instructions in the Uda
 
 
 ## My changes 
-[0]started by adding scroll behavior smooth to the * in css file.
 [1]creating a function that add new section in javascript file and calling it 5 times to start the page with 5 sections.
 [2] create a function that create list item in the navbar for each section in the page.
 [3] addEventListener for the list item to highlight the active link.
 [4] create a function to add "your-active-section" class on the active section by scrolling.
+[5] updated ! used scrollIntoView function to make scroll behavior smooth 
